@@ -1,21 +1,15 @@
 #!/bin/bash
 
-filename=$1
-
-while read line; do
-    n=$line
-    factors=""
-    count=0
-    for ((i=1; i<=n; i++)); do
-        if ((n % i == 0)); then
-            factors="$factors $i"
-            ((count++))
-            if [ $count -eq 2 ]
-            then
+while read n; do
+    if [[ $(($n % 2)) -eq 0 ]]; then
+        echo "$n=$(($n/2))*2"
+    else
+        for i in $(seq 3 $(($n/2))); do
+            if [[ $(($n % $i)) -eq 0 ]]; then
+                echo "$n=$i*$(($n/$i))"
                 break
             fi
-        fi
-    done
-    echo "$n = $factors"
-done < $filename
+        done
+    fi
+done < $1
 
