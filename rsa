@@ -17,5 +17,5 @@ if [ $# -ne 1 ]; then
 fi
 
 while read n; do
-    echo "$n= $(factorize $n)"
+    echo "$n=$(factorize $n)"
 done < $1
